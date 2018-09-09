@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0px;
+			border: 0px;
+		}
+		.father{
+			position: relative;
+			width: 500px;
+			height: 300px;
+			margin: 100px auto;
+			overflow: hidden;
+		}
+		.div:hover{
+			animation-play-state: paused;
+			cursor: pointer;
+		}
+
+		.img{
+			height: 300px;
+			width: 500px;
+			
+		}
+		.div{
+			position: absolute;
+			left: 0;top: 0;
+			width: 600%;
+			height: 100%;
+			font-size: 0;
+			transform:translate(0,0);
+			animation: imgs 15s infinite;
+		}
+		@keyframes imgs {
+			0% {left: 0px;}
+			15% {left:0px;}
+			15.000001% {left:-500px;}
+			35% {left:-500px;}
+			35.000001% {left: -1000px;}
+			55% {left: -1000px;}
+			55.000001% {left: -1500px;}
+			75% {left: -1500px;}
+			75.000001% {left: -2000px;}
+			95% {left: -2000px;}
+			95.000001% {left: 0px;}
+		}
+	</style>
+</head>
+<body>
+	<div class="father">
+		<div class="div">
+			<img src="img1.png" alt="" class="img">
+			<img src="img2.png" alt="" class="img">
+			<img src="img3.png" alt="" class="img">
+			<img src="img4.png" alt="" class="img">
+			<img src="img5.png" alt="" class="img">
+			<img src="img1.png" alt="" class="img">
+		</div>
+		
+	</div>
+</body>
+</html>
