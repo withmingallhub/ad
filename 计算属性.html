@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+    <div id="main">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+    <script>
+        var main =new Vue ({
+            el:'#main',
+            data:{
+                message: 'Hello'
+            },
+            computed: {
+                // 计算属性的 getter
+                reversedMessage: function () {
+                // `this` 指向 vm 实例
+                return this.message.split('').reverse().join('')
+                }
+            },
+            // methods: {
+            //     reversedMessage: function () {
+            //         return this.message.split('').reverse().join('')
+            //     }
+            // }
+        })
+    </script>
+
+
+
+
+<!-- 侦听器 -->
+<div id="watch-example">
+    <p>
+        Ask a yes/no question:
+        <input v-model="question">
+    </p>
+    <p>{{ answer }}</p>
+</div>
+<script>
+        var watchExampleVM = new Vue({
+          el: '#watch-example',
+          data: {
+            question: '',
+            answer: 'I cannot give you an answer until you ask a question!'
+          },
+          watch: {
+            // 如果 `question` 发生改变，这个函数就会运行
+            question: function (newQuestion, oldQuestion) {
+              this.answer = 'Waiting for you to stop typing...'
+            }
+          }
+        })
+        </script>
+
+
+<div id="example-3">
+        <button v-on:click="say('hi')">Say hi</button>
+        <button v-on:click="say('what')">Say what</button>
+        <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+        Submit
+      </button>
+</div>
+
+<script>
+new Vue({
+  el: '#example-3',
+  methods: {
+    say: function (message) {
+      alert(message)
+    },
+    warn: function (message, event) {
+        // 现在我们可以访问原生事件对象
+        if (event) event.preventDefault()
+        alert(message)
+  }
+  }
+})
+</script>
+
+
+
+
+
+</body>
+</html>
