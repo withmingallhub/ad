@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+    <div id="main">
+        <comm></comm>
+        <comm></comm>
+        <comm></comm>
+    </div>
+    <template id="addIt">
+        <div>
+            <input type="button" value="+1" @click="addi">
+            <h1>{{ count }}</h1>
+        </div>
+    </template>
+
+    <script>
+        // var data = { count : 0 }
+        Vue.component('comm',{
+            template:'#addIt',
+            data:function(){
+                // return data;
+                return {count : 0};
+            },
+            methods:{
+                addi(){
+                    this.count ++;
+                }
+            }
+        })
+        var vm = new Vue({
+            el:'#main'
+        })
+    </script>
+
+    <!-- 设置组件的切换 -->
+    <div id="change">
+        <a href="" @click.prevent="comName='sign-in'">登录</a>
+        <a href="" @click.prevent="comName='sign-up'">注册</a>
+        <component :is="comName"></component>
+    </div>
+    <template id="In">
+        <div>这是登陆页面</div>
+    </template>
+    <template id="Up">
+        <div>这是注册页面</div>
+    </template>
+
+
+    <script>
+         Vue.component('signIn',{
+             template:'#In'
+         })
+         Vue.component('signUp',{
+             template:'#Up'
+         })
+        var vmm = new Vue({
+            el:'#change',
+            data:{
+                comName:'sign-in'
+            }
+        })
+    </script>
+
+    <!-- 通过prop向子组件传递数据 -->
+    <div id="prop">
+            <blog-post head="My journey with Vue"></blog-post>
+            <blog-post head="Blogging with Vue"></blog-post>
+            <blog-post head="Why Vue is so fun"></blog-post>
+    </div>
+    <script>
+        Vue.component('blog-post', {
+            props: ['head'],
+            template: '<h3>{{ head }}</h3>'
+        })
+        var  propp = new Vue ({
+            el:'#prop',
+        })
+    </script>
+</body>
+</html>

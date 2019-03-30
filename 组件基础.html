@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+    <div id="main">
+        <!-- 如果要使用组件，只需要将组件的名称用HTML的形式引入即可 -->
+        <my-com1></my-com1>
+    </div>
+    <script>
+        // var com1 = Vue.extend({
+        //     template:'<h3>使用Vue.extend创建的组件</h3>'  //通过template属性，指定了组件要展示的HTML结构
+        // })
+        // //使用Vue.component('组件名称',创建出来的组件模板对象)
+        // Vue.component('myCom1',com1);
+        Vue.component('myCom1',{
+            template:'<span>直接使用component创建组件</span>'
+        })
+        var vu = new Vue({
+            el:'#main',
+            data:{
+
+            },
+            methods:{
+
+            }
+        });
+
+    </script>
+    <template id="three">
+        <div>
+            <p>通过 template 元素，在外部定义组件结构</p>
+            <p>最好用的一种方式</p>
+        </div>
+    </template>
+    <div id="threeIdea">
+        <com></com>
+    </div>
+    <script>
+        Vue.component('com',{
+            template:'#three'
+        })
+        var vmm = new Vue({
+            el:'#threeIdea',
+        })
+    </script>
+    <div id="self">
+            <comself></comself>
+    </div>
+    <script>
+        var selfa = new Vue({
+            el:'#self',
+            data:{},
+            components:{
+                comself: {
+                    template:'<h2>这是一个私有组件</h2>'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

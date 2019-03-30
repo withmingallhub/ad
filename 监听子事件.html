@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+        <div id="blog-posts-events-demo">
+            <div :style="{ fontSize: postFontSize + 'em' }">
+                <!-- 当点击这个按钮时，
+                    我们需要告诉父级组件放大所有博文的文本。
+                    幸好 Vue 实例提供了一个自定义事件的系统来解决这个问题。
+                    父级组件可以像处理 native DOM 事件一样通过 v-on 监听子组件实例的任意事件： -->
+                <blog-post
+                v-for="post in posts"
+                v-bind:key="post.id"
+                v-bind:post="post"
+                v-on:enlarge-text="postFontSize += 0.1"
+                ></blog-post>
+            </div>  
+        </div>
+        <script>
+            Vue.component('blog-post', {
+                props: ['post'],
+                // 同时子组件可以通过调用内建的 $emit 方法 并传入事件名称来触发一个事件：
+                template: `
+                    <div class="blog-post">
+                    <h3>{{ post.title }}</h3>
+                    <button v-on:click="$emit('enlarge-text')">
+                        Enlarge text
+                    </button>
+                    <div v-html="post.content"></div>
+                    </div>
+                `
+            })
+            var vm = new Vue({
+                el: '#blog-posts-events-demo',
+                data: {
+                    posts: [{ id: 1, title: 'My journey with Vue' },
+                            { id: 2, title: 'Blogging with Vue' },
+                            { id: 3, title: 'Why Vue is so fun' }],
+                    postFontSize: 1
+                }
+            })
+        </script>
+
+
+
+
+        
+    <!-- 使用事件抛出一个值 -->
+    <div id="pull">
+            <div :style="{ fontSize: postFontSize + 'em' }">
+                    <!-- 当点击这个按钮时，
+                        我们需要告诉父级组件放大所有博文的文本。
+                        幸好 Vue 实例提供了一个自定义事件的系统来解决这个问题。
+                        父级组件可以像处理 native DOM 事件一样通过 v-on 监听子组件实例的任意事件： -->
+                    <blog-post2
+                    v-for="post in posts"
+                    v-bind:key="post.id"
+                    v-bind:post="post"
+                    v-on:enlarge-text2="postFontSize += $event"
+                    ></blog-post2>
+            </div>  
+    </div>
+
+    <script>
+        Vue.component('blog-post2', {
+            props: ['post'],
+            // 同时子组件可以通过调用内建的 $emit 方法 并传入事件名称来触发一个事件：
+            template: `
+                <div class="blog-post2">
+                <h3>{{ post.title1 }}</h3>
+                <button v-on:click="$emit('enlarge-text2', 0.1)">
+                    Enlarge text
+                </button>
+                <div v-html="post.content"></div>
+                </div>
+            `
+        })
+        var pullit = new Vue({
+            el:'#pull',
+            data:{
+                posts: [{ id: 1, title1: 'My journey with Vue' },
+                        { id: 2, title1: 'Blogging with Vue' },
+                        { id: 3, title1: 'Why Vue is so fun' }],
+                postFontSize: 1
+            }
+        })
+    </script>
+
+
+
+
+
+
+
+
+
+        <!-- 在组件上使用 v-model -->
+        <div id="exchange">
+                <custom-input v-model="searchText"></custom-input>
+        </div>
+
+        <script>
+            Vue.component('custom-input', {
+                props: ['value'],
+                template: `
+                    <input
+                    v-bind:value="value"
+                    v-on:input="$emit('input', $event.target.value)"
+                    >
+                `
+            })
+            var exchan = new Vue({
+                el:'#exchange',
+                data:{
+                    searchText:''
+                }
+            })
+        </script>
+</body>
+</html>
