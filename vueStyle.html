@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            color:blue;
+        }
+        .adress{
+            position: relative;
+            top: 20px;
+        }
+        .thin{
+            font-weight: 200;
+        }
+        .size{
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="ha">
+        <!--传统写法 -->
+        <h1 class="red thin adress">{{text1}}</h1>
+        <!-- 第一种方式，传递一个数组 -->
+        <p v-bind:class="['blue']">text2</p>
+        <h1 :class="{red:true}">这是第二个h1标签</h1>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#ha',
+            data:{
+                text1:'严欣豪',
+                text2:'刘拜托'
+            }
+            
+        });
+    </script>
+</body>
+</html>
