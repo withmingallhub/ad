@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+    <div id="main">
+        <p ref="name1"></p>
+        <login ref="name"></login>
+        <button @click="inclick" style="height:50px;width:100px;">按钮</button>
+    </div>
+
+    <script>
+        Vue.component('login',{
+            template:'<h1>这是log组件</h1>',
+            data(){
+                return {
+                    msg:'子组件的msg数据',
+                }
+            },
+            methods:{
+                show(){
+                    console.log('子组件的方法!');
+                }
+            }
+        })
+        var vm = new Vue({
+            el:'#main',
+            data:{
+
+            },
+            methods:{
+                inclick(){
+                // 可以使用组件的是数据和方法
+                console.log(this.$refs.name.msg);
+                this.$refs.name.show();
+                }
+            }
+        }) 
+    </script>
+</body>
+</html>

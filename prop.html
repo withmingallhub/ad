@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+    <!-- 使用prop向子组件传递变量数据 -->
+    <div id="mainProp">
+        <blog post-title='Hello'></blog>
+        <blog v-bind:post-title='post.name'></blog>
+        <blog :post-title='post.age'></blog>
+        <blog :post-title='post.worlds'></blog>
+    </div>
+    <script>
+        Vue.component('blog',{
+            // 传递的变量名称需要使用prop给子组件声明
+            // props:['postTitle','posthead','postfoot','postbody'],
+            props:{
+                postTitle:String
+            },
+            template:'<h2>{{ postTitle }}</h2>'
+        })
+        var vm = new Vue({
+            el:'#mainProp',
+            data:{
+                post:{
+                    name:'冯军伟',
+                    age:'20 years',
+                    worlds:'狗豪是一个狗'
+                }
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>

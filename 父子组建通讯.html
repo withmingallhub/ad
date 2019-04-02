@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+    <!-- <div id="main">
+        <login v-bind:mms="msg"></login>
+    </div> -->
+    <!-- <script>
+        var vm = new Vue({
+            el:'#main',
+            data:{
+                msg:'父组件中的数据'
+            },
+            methods:{
+
+            },
+            components:{
+                login:{
+                    template:`<h1>这是子组件----{{ mms }}</h1>`,
+                    props:['mms']
+                }
+            }
+        })
+    </script> -->
+
+    <!-- 父组件向子组建传递数据 -->
+    <div id="top">
+        <ul>
+            <li style="float:left;padding:20px;list-style: none;background: lemonchiffon;" @click="topname='xin'">yanxinhao</li>
+            <li style="float:left;padding:20px;list-style: none;background: lemonchiffon;" @click="topname='cheng'">tianchenghao</li>
+        </ul>
+        <xin v-bind:name="xin.name" v-bind:age="xin.age" v-bind:height="xin.height"></xin>
+    </div>
+    <script>
+        Vue.component('xin',{
+            template:`<div style="height:200px;width:200px;">
+                        <p>name: {{ name }}<p>
+                        <p>age: {{ age }}<p>
+                        <p>height: {{ height }}<p>
+                    </div>`,
+            props:['name','age','height']
+        })     
+        var vm = new Vue({
+            el:'#top',
+            data:{
+                xin:{
+                    name:'yanxinhao',
+                    age:'20',
+                    height:'180',
+                },
+            },
+            methods:{
+                
+            },
+            components:{
+
+            }
+        })
+    </script>
+
+</body>
+</html>
