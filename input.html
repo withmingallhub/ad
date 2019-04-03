@@ -16,7 +16,18 @@
         <br>
         <textarea v-model="textarea" placeholder="add multiple lines"></textarea>
     </div>
+    <script>
+        var vm = new Vue({
+            el:'#main',
+            data:{
+                message:'',
+                textarea:''
+            },
+            method:{
 
+            }
+        })    
+    </script>
    
     
     <!-- 复选框 -->
@@ -31,7 +42,14 @@
         <br>
         <span>Checked names: {{ checkedNames }}</span>
     </div>
-
+    <script>
+        var vu = new Vue({
+            el: '#example-3',
+            data: {
+                checkedNames: []
+            }
+        })    
+    </script>
 
 
 
@@ -46,7 +64,14 @@
         </select>
         <span>Selected: {{ selected }}</span>
     </div>
-
+    <script>
+        new Vue({
+            el: '#example-5',
+            data: {
+                selected: ''
+            }
+        })    
+    </script>
 
 
 
@@ -60,28 +85,6 @@
         <span>Selected: {{ selected }}</span>
     </div>
     <script>
-        var vm = new Vue({
-            el:'#main',
-            data:{
-                message:'',
-                textarea:''
-            },
-            method:{
-
-            }
-        })
-        var vu = new Vue({
-            el: '#example-3',
-            data: {
-                checkedNames: []
-            }
-        })
-        new Vue({
-            el: '#example-5',
-            data: {
-                selected: ''
-            }
-        })
         new Vue({
             el: '#for',
             data: {
