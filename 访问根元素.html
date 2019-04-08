@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+    <!-- 访问根元素 -->
+    <div id="main">
+        <login></login>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#main',
+            data:{
+                name:'qwname',
+            },
+            components:{
+                login:{
+                    template:`<div @click="clic">
+                                <span>
+                                    子组件
+                                </span>
+                            </div>`,
+                    methods:{
+                        clic:function(){
+                            return alert(this.$root.name);
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+    <!-- 访问父元素 -->
+    <div id="main1">
+        <login1></login1>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#main1',
+            data:{
+                name:'qwname',
+            },
+            components:{
+                login1:{
+                    template:`<div @click="clic">
+                                <span>
+                                    子组件
+                                </span>
+                            </div>`,
+                    methods:{
+                        clic:function(){
+                            return alert(this.$parent.name);
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+    <!-- 访问子元素 -->
+    <div id="main2" @click="focus">
+            <login2  ref="input"></login2>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#main2',
+            data:{
+                name:'qwname',
+            },
+            components:{
+                login2:{
+                    template:`<div>zizujian</div>`,
+                    data:function(){
+                        return{
+                            name:'namename',
+                        }
+                    },
+                    methods:{
+                    }
+                }
+            },
+            methods:{
+                focus: function () {
+                   return alert(this.$refs.input.name);
+                }
+            }
+        })
+    </script>
+    <div id="main3" @click="focus">
+            <base-input ref="usernameInput"></base-input>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#main3',
+            data:{
+                name:'qwname',
+            },
+            components:{
+                baseInput:{
+                    template:`<input ref="input">`,
+                    data:function(){
+                        return{
+                            name:'namename',
+                        }
+                    },
+                    methods:{
+                    }
+                }
+            },
+            methods:{
+                focus: function () {
+                    this.$refs.usernameInput.focus()
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -43,13 +43,17 @@
     <div id="change">
         <a href="" @click.prevent="comName='sign-in'">登录</a>
         <a href="" @click.prevent="comName='sign-up'">注册</a>
-        <component :is="comName"></component>
+        <!-- 使用component标签来切换组件 -->
+        <!-- 使用keep-alive来保持切换组件后数据不丢失 -->
+        <keep-alive>
+            <component :is="comName"></component>
+        </keep-alive>
     </div>
     <template id="In">
-        <div>这是登陆页面</div>
+        <div>这是登陆页面<input type="text"></div>
     </template>
     <template id="Up">
-        <div>这是注册页面</div>
+        <div>这是注册页面<input type="text"></div>
     </template>
 
 

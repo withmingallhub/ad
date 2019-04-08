@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+    <div id="main">
+        <login v-slot:default='aaa'>  
+            {{ aaa.name.name2 }}
+        </login>
+        <login #def='aaa'> 
+            {{ aaa.name.name1 }} 
+        </login>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#main',
+            data:{
+                
+            },
+            components:{
+                login:{
+                    template:`<span>
+                        <slot v-bind:name="name">
+                            {{ name.name1 }}
+                        </slot>
+                    </span>`,
+                    data:function(){
+                        return{
+                            name:{
+                                name1:'chacao',
+                                name2:'chaocc',
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
